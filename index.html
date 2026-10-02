@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Mapa GPS — Leaflet</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <main class="app">
+
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">🛰️</span>
+        <div>
+          <h1>Geo<span>Track</span></h1>
+          <p>Rastreador com mapa em tempo real</p>
+        </div>
+      </div>
+      <div class="status-badge" id="statusBadge">
+        <span class="pulse-dot"></span>
+        <span id="statusBadgeText">Inicializando</span>
+      </div>
+    </header>
+
+    <!-- MAPA -->
+    <section class="map-card">
+      <div class="map-header">
+        <span class="map-title">🗺️ MAPA EM TEMPO REAL</span>
+        <span class="map-live">LIVE</span>
+      </div>
+      <div id="map"></div>
+      <p class="status" id="status">Aguardando permissão de localização...</p>
+    </section>
+
+    <!-- COORDENADAS -->
+    <section class="coords-card">
+      <div class="coords-grid">
+        <div class="coord-box">
+          <div class="coord-icon">🧭</div>
+          <div class="coord-info">
+            <span class="coord-label">LATITUDE</span>
+            <span class="coord-value" id="lat">--.------</span>
+          </div>
+        </div>
+        <div class="coord-box">
+          <div class="coord-icon">🧭</div>
+          <div class="coord-info">
+            <span class="coord-label">LONGITUDE</span>
+            <span class="coord-value" id="lng">--.------</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gps-meta">
+        <div class="meta-item">
+          <span class="meta-label">Precisão</span>
+          <span class="meta-value" id="accuracy">-- m</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Última atualização</span>
+          <span class="meta-value" id="lastUpdate">--:--:--</span>
+        </div>
+      </div>
+
+      <button id="btnAtualizar" class="btn-primary">
+        <span class="btn-icon">🔄</span>
+        <span>Atualizar Localização</span>
+      </button>
+    </section>
+
+    <!-- ÚLTIMA LOCALIZAÇÃO SALVA -->
+    <div class="saved-card" id="ultimaLocalizacao"></div>
+
+    <!-- DRAG & DROP -->
+    <section class="drag-section">
+      <div class="drag-header">
+        <h2>🗑️ Zona de Descarte</h2>
+        <p>Arraste o documento até a lixeira para apagar os dados salvos</p>
+      </div>
+
+      <div class="drag-area">
+        <div class="drag-item" id="papel" draggable="true">
+          <span class="drag-emoji">📄</span>
+          <span class="drag-caption">localizacao.json</span>
+        </div>
+
+        <div class="lixeira" id="lixeira">
+          <div class="lixeira-lid"></div>
+          <div class="lixeira-body">
+            <span class="lixeira-emoji">🗑️</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <span>Geolocation API + Leaflet + OpenStreetMap + localStorage + Drag & Drop</span>
+    </footer>
+
+  </main>
+
+  <div class="toast" id="toast">
+    <span class="toast-icon" id="toastIcon">✅</span>
+    <span class="toast-text" id="toastText">Pronto!</span>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
